@@ -1,11 +1,25 @@
 const express = require('express')
 const app = express()
 
+// parse json data and resolve frontend cors
+app.use(express.json());
+app.use(require('cors')());
+
+// static file
+app.use('/uploads', express.static(__dirname + '/../upload'));
+
 // database
 require('./../libs/db/db')(app)
 
-app.use('/', (req, res, next) => {
-  res.send('OK!');
+// routes
+require('./admin/route')(app)
+
+// error handle
+app.use((err, req, res, next) => {
+  console.log(err.message);
+  res.send({
+    message: '请求错误'
+  });
 });
 
 app.listen(3000, () => {

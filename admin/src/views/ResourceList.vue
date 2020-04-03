@@ -25,6 +25,7 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 @Component({})
 export default class ResourceList extends Vue {
   @Prop() resource!: string;
+
   name = "ResourceList";
   formData = {};
   tableData = [];
@@ -42,6 +43,7 @@ export default class ResourceList extends Vue {
 
   openDialog(done, type) {
     this.resource === "channels" && (this.formData = { parentChannel: null });
+    this.resource === "replies" && (this.formData = { toUser: null });
     done();
   }
 
@@ -52,7 +54,13 @@ export default class ResourceList extends Vue {
   }
 
   async create(row, done, loading) {
-    await this.$http.post(`/${this.resource}`, row);
+    const data = JSON.parse(JSON.stringify(row));
+    for (const key in data) {
+      if (/^\$./i.test(key)) {
+        delete data[key];
+      }
+    }
+    await this.$http.post(`/${this.resource}`, data);
     this.fetch();
     this.$message.success("创建成功");
     done();

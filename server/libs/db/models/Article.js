@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
   author: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
   title: { type: String },
-  content: { type: String }
+  content: { type: String },
+  covers: [{ type: String }]
 }, {
   timestamps: true
 })

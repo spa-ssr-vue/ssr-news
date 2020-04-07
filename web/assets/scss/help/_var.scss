@@ -1,0 +1,94 @@
+// text
+// text-color bg-color
+$colors: (
+  primary: #4c7eff,
+  blue: #537bff,
+  blue-1: #5076f5,
+  blue-2: #537bfe,
+  blue-3: #498bf8,
+  red: #ee544a,
+  red-1: #ee5449,
+  red-2: #fc4042,
+  yellow: #ffae0c,
+  yellow-1: #f69d45,
+  green: #4faf2b,
+  white: #fff,
+  gray-bg: #f7f8fa,
+  gray-bg-1: #eeeff2,
+  gray: #bdc2c5,
+  gray-3: #9b9ea3,
+  gray-4: #828c9b,
+  gray-5: #7c7c7c,
+  gray-6: #636871,
+  dark-2: #515761,
+  dark-3: #3f4146,
+  dark-4: #373c46,
+  dark-5: #343440,
+  dark-6: #222222,
+  black: #000
+);
+
+// text-font-size
+$font-base-size: 1rem;
+$font-sizes: (
+  12: 0.24,
+  14: 0.28,
+  15: 0.3,
+  16: 0.32,
+  18: 0.36,
+  22: 0.44
+);
+
+// text-font-weight
+$font-weight: (
+  100,
+  200,
+  300,
+  400,
+  500,
+  600,
+  700,
+  800,
+  900,
+  lighter,
+  // 400
+    normal,
+  // 700
+    bold,
+  bolder
+);
+
+// text-line-height
+$line-height: (
+  12: 12px,
+  16: 16px,
+  19: 19.2px,
+  24: 24px
+);
+
+// box
+// box-space
+$space-base-size: 1rem;
+$space-types: (
+  m: margin,
+  p: padding
+);
+$space-directions: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left
+);
+$space-sizes: (
+  0: 0,
+  3: 0.06,
+  6: 0.12,
+  9: 0.18,
+  12: 0.24,
+  15: 0.3,
+  16: 0.32
+);
+
+$border-color: #d4d9de;
+$box-shadow-color: #000;
+$text-shadow-color: #000;

@@ -1,3 +1,4 @@
+@import './help';
 html {
   font-size: 16px;
 }
@@ -27,8 +28,203 @@ body {
   word-wrap: break-word;
 }
 
-.btn {
-  &.btn-home-top {
-    color: red;
+.nav {
+  &.nav-home {
+    height: 0.88rem;
+    line-height: 0.88rem;
+    .nav-link {
+      position: relative;
+      &.nuxt-link-exact-active::after {
+        display: block;
+        content: '';
+        width: 0.36rem;
+        height: 0.06rem;
+        background-color: rgba(103, 245, 255, 1);
+        position: absolute;
+        bottom: 0.06rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+
+  &.nav-channel {
+    box-shadow: 0px 1px 6px 0px rgba(0, 69, 189, 0.1);
+    border-radius: 0.12rem;
+    padding-left: 0.09rem;
+    .nav-link {
+      width: 1.12rem;
+      height: 0.34rem;
+      line-height: 0.34rem;
+      margin-bottom: 0.2rem;
+    }
+  }
+}
+
+.news {
+  .news-item {
+    position: relative;
+
+    &::after {
+      display: block;
+      content: '';
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      transform: scaleY(0.5);
+      background-color: $border-color;
+    }
+    .news-item-title {
+      color: #222222;
+      font-size: 0.36rem;
+      line-height: 0.52rem;
+    }
+    .news-item-info {
+      font-size: 0.24rem;
+      line-height: 0.32rem;
+      color: #828c9b;
+      span {
+        margin-right: 0.18rem;
+      }
+    }
+    .news-item-cover {
+      width: 2.22rem;
+      height: 1.4666rem;
+      border-radius: 0.08rem;
+    }
+  }
+
+  &.news-swiper {
+    .swiper-slide.swiper-slide-prev {
+      padding: 0.24rem 0.32rem 0 0.3rem !important;
+    }
+    .swiper-slide.swiper-slide-active {
+      padding: 0.24rem 0.32rem 0 0.3rem !important;
+      margin-right: -35px;
+      box-shadow: 0px 1px 4px 0px rgba(5, 24, 74, 0.16);
+      border-radius: 0.04rem;
+    }
+    .swiper-slide.swiper-slide-next {
+      padding: 0.24rem 0.32rem 0 0.3rem !important;
+      box-shadow: 0px 1px 4px 0px rgba(5, 24, 74, 0.16);
+      border-radius: 0.04rem;
+    }
+    .news-item-title {
+      font-size: 0.32rem;
+      line-height: 0.48rem;
+    }
+    .news-item-info {
+      margin-bottom: 9px;
+    }
+    .news-item-cover {
+      width: 1.98rem;
+      height: 1.3rem;
+      border-radius: 0.06rem;
+    }
+  }
+}
+
+.video {
+  overflow: hidden;
+  .video-item {
+    overflow: hidden;
+    margin: 0.24rem 0 0 0;
+    padding: 0 0.3rem;
+    position: relative;
+    &::after {
+      display: block;
+      content: '';
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      transform: scaleY(0.5);
+      background-color: $border-color;
+    }
+    .video-item-title {
+      color: #222222;
+      font-size: 0.36rem;
+      line-height: 0.52rem;
+    }
+    .video-item-info {
+      margin: 0.18rem 0;
+      .avatar {
+        width: 0.48rem;
+        height: 0.48rem;
+        margin-right: 0.12rem;
+        border-radius: 50%;
+      }
+      span {
+        margin-right: 0.3rem;
+      }
+    }
+    .video-item-cover {
+      position: relative;
+      .cover {
+        width: 100%;
+        border-radius: 0.06rem;
+      }
+
+      .title {
+        padding: 0.12rem 0.24rem;
+        margin: 0 0 0.18rem 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .info {
+        height: 0.36rem;
+        line-height: 0.36rem;
+        border-radius: 0.18rem;
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        right: 0.18rem;
+        bottom: 0.22rem;
+        padding: 0 0.2rem;
+      }
+
+      .play {
+        width: 0.96rem;
+        height: 0.96rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+.card {
+  &.card-news {
+    .card-header {
+      margin: 0.48rem 0 0.18rem 0;
+      padding: 0 0.3rem 0 0.48rem;
+      font-size: 0.4rem;
+      line-height: 0.44rem;
+      position: relative;
+      .nav-link {
+        height: 0.4rem;
+      }
+      &::before {
+        display: block;
+        content: '';
+        width: 0.24rem;
+        height: 0.4rem;
+        background-color: map-get($colors, primary);
+        position: absolute;
+        left: 0;
+        top: 0.04rem;
+      }
+    }
+
+    .card-btn {
+      height: 0.92rem;
+      line-height: 0.92rem;
+      font-size: 0.3rem;
+      font-weight: 500;
+    }
   }
 }

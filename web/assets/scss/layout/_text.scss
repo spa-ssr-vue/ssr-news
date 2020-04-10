@@ -24,9 +24,9 @@
 }
 
 // text-line-height
-@each $line-height-var in $line-height {
-  .lh-#{$line-height-var} {
-    line-height: $line-height-var;
+@each $line-height-key, $line-height-value in $line-height {
+  .lh-#{$line-height-key} {
+    line-height: $line-height-value;
   }
 }
 

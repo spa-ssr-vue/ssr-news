@@ -31,9 +31,11 @@
 @each $border-dir-key, $border-dir-value in $space-directions {
   // bb-1
   .b#{$border-dir-key}-1 {
-    border: 1px solid $border-color;
+    border-#{$border-dir-value}: 1px solid $border-color;
   }
 }
+
+// 1px ???
 .b-1 {
   border: 1px solid $border-color;
 }

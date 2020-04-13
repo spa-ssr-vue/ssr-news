@@ -18,7 +18,7 @@
     </div>
     <div class="channels-body">
       <div v-if="banner" class="banner">
-        <div v-swiper="swiperOption">
+        <div class="swiper" v-swiper="swiperOption">
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
@@ -27,8 +27,8 @@
             >
               <img class="w-100" :src="item.url" alt="" />
             </div>
-            <div class="swiper-pagination" slot="pagination"></div>
           </div>
+          <div class="swiper-pagination" slot="pagination"></div>
         </div>
       </div>
       <div><news-list :newsList="newsList"></news-list></div>
@@ -177,9 +177,9 @@ export default {
         }
       ],
       swiperOption: {
-        // autoplay: {
-        //   delay: 2000
-        // },
+        autoplay: {
+          delay: 2000
+        },
         pagination: {
           el: '.swiper-pagination'
         }
@@ -215,22 +215,22 @@ export default {
   .channels-body {
     .banner {
       margin: 0.24rem 0.3rem 0 0.3rem;
-      position: relative;
       img {
         width: 100%;
         border-radius: 0.08rem;
       }
 
-      .swiper-wrapper {
-        padding-bottom: 20px;
+      .swiper {
+        padding-bottom: 0.44rem;
       }
 
       .swiper-pagination {
-        width: 100%;
-        left: 0;
+        // width: 100%;
+        // left: 0;
         bottom: 0;
-        z-index: 999;
-        text-align: center;
+        line-height: 0.44rem;
+        // z-index: 999;
+        // text-align: center;
         .swiper-pagination-bullet {
           width: 0.08rem;
           height: 0.08rem;

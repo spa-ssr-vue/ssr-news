@@ -13,14 +13,19 @@
     </nav>
     <div class="bg-white bfc" style="margin-top: -0.84rem">
       <div class="news news-top px-15 bg-white" style="margin-top: 0.84rem">
-        <div class="py-12 bb-1" v-for="(news, index) in newsTop" :key="index">
+        <nuxt-link
+          :to="news.path"
+          class="py-12 bb-1 d-block"
+          v-for="(news, index) in newsTop"
+          :key="index"
+        >
           <p class="title text-dark-6 fs-18 lh-26 mb-3">{{ news.title }}</p>
           <div class="info text-gray-4 fs-12 lh-16">
             <span class="text-red mr-9">置顶</span>
             <span class="mr-9">{{ news.author }}</span>
             <span class="mr-9">{{ news.time }}</span>
           </div>
-        </div>
+        </nuxt-link>
       </div>
     </div>
 
@@ -34,6 +39,31 @@
       </div>
     </div>
     <news-list class="mt-9" :newsList="newsList"></news-list>
+    <footer class="mt-6 bg-gray-bg">
+      <nav class="bg-white">
+        <ul class="nav nav-bottom d-flex flex-wrap text-center">
+          <li class="nav-item" v-for="(item, index) in navChannel" :key="index">
+            <nuxt-link :to="item.path" class="nav-link text-gray-6">{{
+              item.name
+            }}</nuxt-link>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <div class="d-flex jc-center ai-center fs-12 mb-15">
+          <span>反馈</span>
+          <span class="mx-9 text-gray">|</span>
+          <span>举报中心</span>
+          <span class="mx-9 text-gray">|</span>
+          <span>隐私政策</span>
+          <span class="mx-9 text-gray">|</span>
+          <span>电脑版</span>
+        </div>
+        <div class="fs-12 text-gray-4 text-center">
+          Copyright © 1998 - 2020 Tencent. All Rights Reserved
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -54,7 +84,8 @@ export default {
       newsTop: new Array(3).fill({
         title: '习近平回信勉励武汉东湖新城社区工作者',
         author: '新华社新闻',
-        time: '8小时前'
+        time: '8小时前',
+        path: '/articles/asdf'
       }),
       newsList: [
         {

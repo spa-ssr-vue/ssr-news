@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import VideoList from './../../components/VideoList'
+import VideoList from './../../../components/VideoList'
 
 export default {
   components: {

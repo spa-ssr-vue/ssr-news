@@ -1,164 +1,109 @@
 <template>
   <div>
-    <nav
-      class="nav nav-channel flex flex-wrap mx-15 mt-6 pt-12 pb-3 text-center text-dark-2 bg-white fs-16"
-    >
-      <nuxt-link
-        class="nav-link"
-        v-for="(channel, index) in navChannel"
-        :key="index"
-        :to="channel.path"
-        >{{ channel.name }}</nuxt-link
-      >
-    </nav>
-    <div class="bg-white bfc" style="margin-top: -0.84rem">
-      <div class="news news-top px-15 bg-white" style="margin-top: 0.84rem">
-        <div class="py-12 bb-1" v-for="(news, index) in newsTop" :key="index">
-          <p class="title text-dark-6 fs-18 lh-26 mb-3">{{ news.title }}</p>
-          <div class="info text-gray-4 fs-12 lh-16">
-            <span class="text-red mr-9">置顶</span>
-            <span class="mr-9">{{ news.author }}</span>
-            <span class="mr-9">{{ news.time }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- start of header top -->
+    <header>
+      <nav class="d-flex">
+        <nuxt-link to="/" class="flex-1">
+          <img
+            class="logo"
+            src="./../assets/img/logo-text-whitetext_v2.svg"
+            alt="logo"
+          />
+        </nuxt-link>
+        <nuxt-link to="/channel">
+          <img
+            class="channel"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxLjE4OCAzLjc1SDIuODEzYS4xODguMTg4IDAgMCAwLS4xODguMTg4djEuNWMwIC4xMDMuMDg0LjE4Ny4xODguMTg3aDE4LjM3NWEuMTg4LjE4OCAwIDAgMCAuMTg3LS4xODh2LTEuNWEuMTg4LjE4OCAwIDAgMC0uMTg4LS4xODd6bTAgMTQuNjI1SDIuODEzYS4xODguMTg4IDAgMCAwLS4xODguMTg4djEuNWMwIC4xMDMuMDg0LjE4Ny4xODguMTg3aDE4LjM3NWEuMTg4LjE4OCAwIDAgMCAuMTg3LS4xODh2LTEuNWEuMTg4LjE4OCAwIDAgMC0uMTg4LS4xODd6bTAtNy4zMTNIMi44MTNhLjE4OC4xODggMCAwIDAtLjE4OC4xODh2MS41YzAgLjEwMy4wODQuMTg4LjE4OC4xODhoMTguMzc1YS4xODguMTg4IDAgMCAwIC4xODctLjE4OHYtMS41YS4xODguMTg4IDAgMCAwLS4xODgtLjE4OHoiIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIvPjwvc3ZnPg=="
+            alt="更多频道"
+        /></nuxt-link>
+      </nav>
+    </header>
+    <!-- end of header top -->
 
-    <div class="news news-swiper bg-white">
-      <div v-swiper="swiperOption">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="index in 6" :key="index">
-            <news-list class="news-swiper" :newsList="newsList"></news-list>
-          </div>
-        </div>
-      </div>
-    </div>
-    <news-list class="mt-9" :newsList="newsList"></news-list>
+    <!-- start of nav home-->
+    <nav ref="nav" style="height:0.88rem">
+      <ul
+        class="nav nav-home d-flex text-center text-white fs-18 fw-500"
+        :class="isFixed ? 'fixed' : ''"
+      >
+        <li class="nav-item flex-1" v-for="(item, index) in nav" :key="index">
+          <nuxt-link class="nav-link" :to="item.path">{{
+            item.name
+          }}</nuxt-link>
+        </li>
+      </ul>
+    </nav>
+    <!-- end of nav home -->
+
+    <!-- start of main -->
+    <main>
+      <nuxt-child />
+    </main>
+    <!-- end of main -->
   </div>
 </template>
 
 <script>
-import { directive } from 'vue-awesome-swiper'
-import NewsList from './../components/NewsList'
+import { throttle } from './../assets/js/throttle'
+import { adaptREM } from './../assets/js/adaptREM'
 
 export default {
-  directives: {
-    swiper: directive
-  },
-  components: {
-    NewsList
-  },
   data() {
     return {
-      navChannel: new Array(18).fill({ name: '新闻', path: 'news' }),
-      newsTop: new Array(3).fill({
-        title: '习近平回信勉励武汉东湖新城社区工作者',
-        author: '新华社新闻',
-        time: '8小时前'
-      }),
-      newsList: [
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title:
-            '柳州奖励援鄂医疗队员每人一辆汽车?员每人一辆汽车员每人一辆汽车',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
-          author: '航空网',
-          comment: 18,
-          time: '1小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0'
-          ]
-        },
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
-          author: '航空网',
-          comment: 18,
-          time: '1小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0'
-          ]
-        },
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
-          author: '航空网',
-          comment: 18,
-          time: '1小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0'
-          ]
-        }
-      ],
-      swiperOption: {}
+      isFixed: false,
+      nav: [
+        { name: '要闻', path: '/' },
+        { name: '抗疫', path: '/covid' },
+        { name: '热点', path: '/hot' },
+        { name: '视频', path: '/video' }
+      ]
+    }
+  },
+
+  mounted() {
+    adaptREM()
+    window.addEventListener('scroll', this.handleScrollThrottle)
+    window.addEventListener('resize', throttle(adaptREM, 100))
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.handleScrollThrottle)
+  },
+
+  methods: {
+    handleScroll() {
+      if (this.$refs.nav.getBoundingClientRect().top <= 0) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
+      }
+    }
+  },
+  computed: {
+    handleScrollThrottle() {
+      return throttle(this.handleScroll, 100)
     }
   }
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+header {
+  height: 3rem;
+  padding: 0.3rem 0.24rem 0 0.3rem;
+  margin-bottom: -2.1rem;
+  background: linear-gradient(
+    176deg,
+    rgba(76, 126, 255, 1) 0%,
+    rgba(100, 174, 252, 1) 100%
+  );
+  .logo {
+    width: 1.8rem;
+    height: 0.48rem;
+  }
+
+  .channel {
+    width: 0.52rem;
+    height: 0.52rem;
+  }
+}
+</style>

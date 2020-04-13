@@ -1,6 +1,7 @@
 <template>
   <div>
-    <nuxt-child />
+    <h3>covid</h3>
+    <div>暂待开发</div>
   </div>
 </template>
 

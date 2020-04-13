@@ -3,7 +3,7 @@
     <div v-for="(news, index) in newsList" :key="index">
       <nuxt-link
         to="/"
-        class="news-item flex ai-start py-12"
+        class="news-item d-flex ai-start py-12"
         v-if="news.covers.length === 1"
       >
         <div>
@@ -23,7 +23,7 @@
       <nuxt-link to="/" class="news-item pt-9 pb-6" v-else>
         <div>
           <p class="news-item-title mb-6">{{ news.title }}</p>
-          <div class="flex jc-between ai-center mb-6">
+          <div class="d-flex jc-between ai-center mb-6">
             <img
               v-for="(item, index) in news.covers"
               :key="index"

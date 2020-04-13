@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NewsListCard from './../../components/NewsListCard'
+import NewsListCard from './../../../components/NewsListCard'
 
 export default {
   components: {

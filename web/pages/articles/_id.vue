@@ -111,6 +111,7 @@ export default {
   mounted() {
     adaptREM()
   },
+  layout: 'app',
   components: {
     NewsList
   },

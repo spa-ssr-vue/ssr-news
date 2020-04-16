@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="news news-swiper bg-white">
+    <!-- <div class="news news-swiper bg-white">
       <div v-swiper="swiperOption">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="index in 6" :key="index">
@@ -37,9 +37,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <div style="height: 400px"></div>
     <news-list class="mt-9" :newsList="newsList"></news-list>
-    <footer class="mt-6 bg-gray-bg">
+    <footer class="mt-6 bg-gray-bg" ref="footer">
       <nav class="bg-white">
         <ul class="nav nav-bottom d-flex flex-wrap text-center">
           <li class="nav-item" v-for="(item, index) in navChannel" :key="index">
@@ -103,8 +104,24 @@ export default {
           author: '腾讯较真',
           comment: 118,
           time: '5小时前',
+          covers: ['https://inews.gtimg.com/newsapp_ls/0/11595585857_294195/0']
+        },
+        {
+          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
+          author: '腾讯较真',
+          comment: 118,
+          time: '5小时前',
+          covers: ['https://inews.gtimg.com/newsapp_ls/0/11595688276_294195/0']
+        },
+        {
+          title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
+          author: '航空网',
+          comment: 18,
+          time: '1小时前',
           covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
+            'https://inews.gtimg.com/newsapp_ls/0/11591210788_294195/0',
+            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
+            'https://inews.gtimg.com/newsapp_ls/0/11590072360_294195/0'
           ]
         },
         {
@@ -112,9 +129,7 @@ export default {
           author: '腾讯较真',
           comment: 118,
           time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
+          covers: ['https://inews.gtimg.com/newsapp_ls/0/11595546087_295195/0']
         },
         {
           title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
@@ -123,8 +138,8 @@ export default {
           time: '1小时前',
           covers: [
             'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0'
+            'https://inews.gtimg.com/newsapp_ls/0/11595546088_295195/0',
+            'https://inews.gtimg.com/newsapp_ls/0/11595546090_295195/0'
           ]
         },
         {
@@ -132,58 +147,21 @@ export default {
           author: '腾讯较真',
           comment: 118,
           time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
-          author: '航空网',
-          comment: 18,
-          time: '1小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0'
-          ]
+          covers: ['https://inews.gtimg.com/newsapp_ls/0/11588197632_295195/0']
         },
         {
           title: '柳州奖励援鄂医疗队员每人一辆汽车?',
           author: '腾讯较真',
           comment: 118,
           time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
+          covers: ['https://inews.gtimg.com/newsapp_ls/0/11588197633_295195/0']
         },
         {
           title: '柳州奖励援鄂医疗队员每人一辆汽车?',
           author: '腾讯较真',
           comment: 118,
           time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '柳州奖励援鄂医疗队员每人一辆汽车?',
-          author: '腾讯较真',
-          comment: 118,
-          time: '5小时前',
-          covers: [
-            'https://mat1.gtimg.com/rain/bailing20/3ea246e5fa65.jiaozhen.png'
-          ]
-        },
-        {
-          title: '国产最强外贸坦克首度冲出亚洲！非将领：谢天谢地，救星终于来了',
-          author: '航空网',
-          comment: 18,
-          time: '1小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11559055143_295195/0'
-          ]
+          covers: ['https://inews.gtimg.com/newsapp_ls/0/11588197634_295195/0']
         }
       ],
       swiperOption: {}

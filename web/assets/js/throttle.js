@@ -1,4 +1,4 @@
-export function throttle(action, delay) {
+export function throttle(action, defer) {
   let timer = null
   return function() {
     const context = this
@@ -8,8 +8,7 @@ export function throttle(action, delay) {
     }
     timer = setTimeout(function() {
       timer = null
-      clearTimeout(timer)
       action.apply(context, args)
-    }, delay)
+    }, defer)
   }
 }

@@ -27,7 +27,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '@/plugins/vue-awesome-swiper.js', ssr: false }],
+  plugins: [
+    '@/plugins/vue-lazyload-img.js',
+    { src: '@/plugins/vue-awesome-swiper.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

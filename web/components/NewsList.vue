@@ -17,7 +17,13 @@
           </div>
         </div>
         <div class="ml-15">
-          <img class="news-item-cover" :src="news.covers[0]" alt="" />
+          <img
+            class="news-item-cover"
+            src="./../assets/img/image-placeholder-logo.svg"
+            v-lazy="news.covers[0]"
+            data-load="true"
+            alt=""
+          />
         </div>
       </nuxt-link>
       <nuxt-link to="/" class="news-item pt-9 pb-6" v-else>
@@ -27,7 +33,9 @@
             <img
               v-for="(item, index) in news.covers"
               :key="index"
-              :src="item"
+              src="./../assets/img/image-placeholder-logo.svg"
+              v-lazy="item"
+              data-load="true"
               alt=""
               class="news-item-cover"
             />

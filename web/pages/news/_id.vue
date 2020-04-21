@@ -19,6 +19,7 @@
       /></nuxt-link>
     </div>
     <div class="article-title bg-white">
+      {{ id }}
       <h1 class="fs-22 text-dark-6 fw-400 pt-16 pb-15">{{ article.title }}</h1>
     </div>
     <div class="article-info d-flex ai-center fs-12 lh-24 bg-white">
@@ -78,7 +79,11 @@
     <footer class="mt-6">
       <nav class="bg-white">
         <ul class="nav nav-bottom d-flex flex-wrap text-center">
-          <li class="nav-item" v-for="(item, index) in nav" :key="index">
+          <li
+            class="nav-item"
+            v-for="(item, index) in bottomList"
+            :key="`nav-bottom-${index}`"
+          >
             <nuxt-link :to="item.path" class="nav-link text-gray-6">{{
               item.name
             }}</nuxt-link>
@@ -108,9 +113,7 @@ export default {
       id: params.id
     }
   },
-  mounted() {
-    adaptREM()
-  },
+
   layout: 'app',
   components: {
     NewsList
@@ -248,11 +251,30 @@ export default {
           createdAt: '3小时前'
         }
       ],
-      nav: new Array(19).fill({
-        name: '新闻',
-        path: '/'
-      })
+      userChannelList: []
     }
+  },
+  computed: {
+    bottomList() {
+      const bottomList = this.userChannelList.slice(0, 18).map((item) => ({
+        name: item.name,
+        path: `/channels/${item._id}`
+      }))
+      return bottomList
+    }
+  },
+  mounted() {
+    const userChannelList = JSON.parse(localStorage.getItem('userChannelList'))
+    if (userChannelList) {
+      this.userChannelList = userChannelList
+    } else {
+      this.userChannelList = this.$store.getters['channel/userChannelList']
+      localStorage.setItem(
+        'userChannelList',
+        JSON.stringify(this.$store.getters['channel/userChannelList'])
+      )
+    }
+    adaptREM()
   }
 }
 </script>

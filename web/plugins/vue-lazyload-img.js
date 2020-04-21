@@ -1,19 +1,10 @@
 import Vue from 'vue'
-import { throttle } from './../assets/js/throttle'
-
-function isShow(el) {
-  const clientHeight =
-    window.innerHeight ||
-    document.documentElement.clientHeight ||
-    document.body.clientHeight
-  const top = el.getBoundingClientRect().top
-  return top < clientHeight
-}
+import { throttle, isShow } from './../assets/js/utils'
 
 function lazyLoad(el, binding) {
-  if (el && el.dataset.load && isShow(el)) {
+  if (el && el.dataset.lazy === 'true' && isShow(el)) {
     el.src = binding.value
-    el.removeAttribute('data-load')
+    el.removeAttribute('data-lazy')
   }
 }
 

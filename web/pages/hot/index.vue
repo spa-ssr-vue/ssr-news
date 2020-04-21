@@ -10,6 +10,7 @@
 import NewsListCard from './../../components/NewsListCard'
 
 export default {
+  layout: 'main',
   components: {
     NewsListCard
   },

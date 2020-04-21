@@ -1,0 +1,1 @@
+export const CHANNEL_MUTATION = 'CHANNEL_MUTATION'

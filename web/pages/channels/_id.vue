@@ -16,6 +16,7 @@
           alt="更多频道"
       /></nuxt-link>
     </div>
+    <div>{{ id }}</div>
     <div class="channels-body">
       <div v-if="banner" class="banner">
         <div class="swiper" v-swiper="swiperOption">
@@ -41,7 +42,9 @@ import { directive } from 'vue-awesome-swiper'
 import NewsList from './../../components/NewsList'
 
 export default {
-  asyncData({ params }) {
+  layout: 'app',
+  async asyncData({ params, $axios }) {
+    const res = await $axios.$get(`/news/${params.id}`)
     return {
       id: params.id
     }
@@ -215,6 +218,7 @@ export default {
   .channels-body {
     .banner {
       margin: 0.24rem 0.3rem 0 0.3rem;
+
       img {
         width: 100%;
         border-radius: 0.08rem;
@@ -225,12 +229,8 @@ export default {
       }
 
       .swiper-pagination {
-        // width: 100%;
-        // left: 0;
         bottom: 0;
         line-height: 0.44rem;
-        // z-index: 999;
-        // text-align: center;
         .swiper-pagination-bullet {
           width: 0.08rem;
           height: 0.08rem;

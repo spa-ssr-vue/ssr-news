@@ -1,12 +1,18 @@
 <template>
-  <div>
-    <div>1111111111111111111</div>
-    <nuxt-child id="z" class="zzzzzzzzz" />
-  </div>
+  <nuxt />
 </template>
 
 <script>
-export default {}
+import { adaptREM } from './../assets/js/adaptREM'
+import { throttle } from './../assets/js/throttle'
+
+export default {
+  name: 'App',
+  mounted() {
+    adaptREM()
+    window.addEventListener('resize', throttle(adaptREM, 50))
+  }
+}
 </script>
 
 <style></style>

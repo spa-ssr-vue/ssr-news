@@ -3,7 +3,7 @@
     <ul class="nav nav-channel-custom d-flex flex-wrap text-center px-12 pb-9">
       <li
         class="nav-item w-25 p-6"
-        v-for="(item, index) in navChannel"
+        v-for="(item, index) in localList"
         :key="index"
       >
         <nuxt-link class="nav-link fs-16 bg-gray-bg-1" :to="item.path">{{
@@ -16,17 +16,31 @@
 
 <script>
 export default {
-  asyncData({ params }) {
-    return {
-      channel1: params.channel
-    }
-  },
   data() {
     return {
-      navChannel: new Array(22).fill({
-        name: 'local',
-        path: '/channels/asdfe'
-      })
+      localChannelList: []
+    }
+  },
+  computed: {
+    localList() {
+      return this.localChannelList.map((item) => ({
+        name: item.name,
+        path: `/channels/${item._id}`
+      }))
+    }
+  },
+  mounted() {
+    const localChannelList = JSON.parse(
+      localStorage.getItem('localChannelList')
+    )
+    if (localChannelList) {
+      this.localChannelList = localChannelList
+    } else {
+      this.localChannelList = this.$store.getters['channel/localChannelList']
+      localStorage.setItem(
+        'localChannelList',
+        JSON.stringify(this.$store.getters['channel/localChannelList'])
+      )
     }
   }
 }

@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 export default {
   mode: 'universal',
   /*
@@ -28,8 +31,8 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '@/plugins/vue-lazyload-img.js',
-    { src: '@/plugins/vue-awesome-swiper.js', ssr: false }
+    { src: '@/plugins/vue-awesome-swiper.js', ssr: false },
+    { src: '@/plugins/vue-lazyload-img.js' }
   ],
   /*
    ** Nuxt.js dev-modules

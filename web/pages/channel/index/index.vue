@@ -3,7 +3,7 @@
     <ul class="nav nav-channel-custom d-flex flex-wrap text-center px-12 pb-9">
       <li
         class="nav-item w-25 p-6"
-        v-for="(item, index) in navChannel"
+        v-for="(item, index) in abandonList"
         :key="index"
       >
         <nuxt-link class="nav-link fs-16 bg-gray-bg-1" :to="item.path">{{
@@ -16,12 +16,34 @@
 
 <script>
 export default {
+  layout: 'app',
   data() {
     return {
-      navChannel: new Array(22).fill({
-        name: '推荐',
-        path: '/channels/asdfe'
-      })
+      abandonChannelList: []
+    }
+  },
+  computed: {
+    abandonList() {
+      return this.abandonChannelList.map((item) => ({
+        name: item.name,
+        path: `/channels/${item._id}`
+      }))
+    }
+  },
+  mounted() {
+    const abandonChannelList = JSON.parse(
+      localStorage.getItem('abandonChannelList')
+    )
+    if (abandonChannelList) {
+      this.abandonChannelList = abandonChannelList
+    } else {
+      this.abandonChannelList = this.$store.getters[
+        'channel/abandonChannelList'
+      ]
+      localStorage.setItem(
+        'abandonChannelList',
+        JSON.stringify(this.$store.getters['channel/abandonChannelList'])
+      )
     }
   }
 }

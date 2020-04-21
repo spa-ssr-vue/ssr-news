@@ -6,7 +6,9 @@
 </template>
 
 <script>
-export default {}
+export default {
+  layout: 'main'
+}
 </script>
 
 <style></style>

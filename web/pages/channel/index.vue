@@ -13,7 +13,7 @@
         >
           <li
             class="nav-item w-25 p-6"
-            v-for="(item, index) in navChannel"
+            v-for="(item, index) in userList"
             :key="index"
           >
             <nuxt-link class="nav-link fs-16 bg-gray-bg-1" :to="item.path">{{
@@ -48,12 +48,30 @@
 
 <script>
 export default {
+  layout: 'app',
   data() {
     return {
-      navChannel: new Array(22).fill({
-        name: '新闻',
-        path: '/channel'
-      })
+      userChannelList: []
+    }
+  },
+  computed: {
+    userList() {
+      return this.userChannelList.map((item) => ({
+        name: item.name,
+        path: `/channels/${item._id}`
+      }))
+    }
+  },
+  mounted() {
+    const userChannelList = JSON.parse(localStorage.getItem('userChannelList'))
+    if (userChannelList) {
+      this.userChannelList = userChannelList
+    } else {
+      this.userChannelList = this.$store.getters['channel/userChannelList']
+      localStorage.setItem(
+        'userChannelList',
+        JSON.stringify(this.$store.getters['channel/userChannelList'])
+      )
     }
   }
 }

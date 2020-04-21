@@ -49,34 +49,39 @@ export default class Main extends Vue {
           {
             title: "频道列表",
             path: "/channels/list",
-            icon: "el-icon-data-line"
+            icon: "el-icon-data-line",
+          },
+          {
+            title: "标签列表",
+            path: "/tags/list",
+            icon: "el-icon-data-line",
           },
           {
             title: "文章列表",
             path: "/articles/list",
-            icon: "el-icon-reading"
+            icon: "el-icon-reading",
           },
           {
             title: "评论列表",
             path: "/comments/list",
-            icon: "el-icon-s-comment"
+            icon: "el-icon-s-comment",
           },
           {
             title: "回复列表",
             path: "/replies/list",
-            icon: "el-icon-s-promotion"
+            icon: "el-icon-s-promotion",
           },
-          { title: "操作列表", path: "/actions/list", icon: "el-icon-aim" }
-        ]
+          { title: "操作列表", path: "/actions/list", icon: "el-icon-aim" },
+        ],
       },
       {
         title: "系统管理",
         icon: "el-icon-setting",
         items: [
-          { title: "用户列表", path: "/users/list", icon: "el-icon-user" }
-        ]
-      }
-    ]
+          { title: "用户列表", path: "/users/list", icon: "el-icon-user" },
+        ],
+      },
+    ],
   };
 }
 </script>

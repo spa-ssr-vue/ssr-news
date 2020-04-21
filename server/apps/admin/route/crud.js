@@ -8,7 +8,7 @@ module.exports = app => {
     const data = await req.Model.create(item);
     res.send({
       success: true,
-      data
+      data,
     });
   });
 
@@ -23,7 +23,7 @@ module.exports = app => {
     res.send({
       success: true,
       total,
-      data
+      data,
     });
   });
 
@@ -32,7 +32,7 @@ module.exports = app => {
     const data = await req.Model.findOneById(id);
     res.send({
       success: true,
-      data
+      data,
     });
   });
 
@@ -42,7 +42,7 @@ module.exports = app => {
     const data = await req.Model.findByIdAndUpdate(id, item);
     res.send({
       success: true,
-      data
+      data,
     });
   });
 
@@ -51,7 +51,7 @@ module.exports = app => {
     const data = await req.Model.findByIdAndDelete(id);
     res.send({
       success: true,
-      data
+      data,
     });
   });
 

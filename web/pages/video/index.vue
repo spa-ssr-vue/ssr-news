@@ -8,6 +8,7 @@
 import VideoList from './../../components/VideoList'
 
 export default {
+  layout: 'main',
   components: {
     VideoList
   },

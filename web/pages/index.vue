@@ -49,8 +49,7 @@
     <!-- end of home news -->
 
     <div
-      class="more d-flex jc-center ai-center bg-white mt-6"
-      style="height:0.92rem;line-height:0.92rem"
+      class="more more-load d-flex jc-center ai-center bg-white mt-6"
       ref="more"
       @click="pullWrapper"
     >
@@ -107,7 +106,9 @@ export default {
     const bannerNews = await $axios.$get('/news', {
       params: {
         type: 'tag',
-        name: 'banner'
+        name: 'banner',
+        page: 1,
+        limit: 18
       }
     })
     const homeNews = await $axios.$get('/news', {

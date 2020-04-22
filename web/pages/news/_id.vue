@@ -19,13 +19,12 @@
       /></nuxt-link>
     </div>
     <div class="article-title bg-white">
-      {{ id }}
-      <h1 class="fs-22 text-dark-6 fw-400 pt-16 pb-15">{{ article.title }}</h1>
+      <h1 class="fs-22 text-dark-6 fw-400 pt-16 pb-15">{{ news.title }}</h1>
     </div>
     <div class="article-info d-flex ai-center fs-12 lh-24 bg-white">
       <img class="mr-6" :src="article.author.avatar" alt="" />
-      <span class="text-primary mr-9">{{ article.author.username }}</span>
-      <span class="flex-1 text-gray-4">{{ article.createdAt }}</span>
+      <span class="text-primary mr-9">{{ news.author.username }}</span>
+      <span class="flex-1 text-gray-4">{{ news.createdAt }}</span>
       <span class="px-9 bg-primary text-white">+关注</span>
     </div>
     <div class="article-content bg-white">
@@ -108,9 +107,12 @@ import { adaptREM } from './../../assets/js/adaptREM'
 import NewsList from './../../components/NewsList'
 
 export default {
-  asyncData({ params }) {
+  async asyncData({ params, $axios }) {
+    const news = await $axios.$get(`/news/${params.id}`)
+
     return {
-      id: params.id
+      id: params.id,
+      news
     }
   },
 
@@ -274,7 +276,6 @@ export default {
         JSON.stringify(this.$store.getters['channel/userChannelList'])
       )
     }
-    adaptREM()
   }
 }
 </script>

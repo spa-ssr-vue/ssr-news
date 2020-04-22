@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
   name: { type: String },
   alias: { type: String },
   path: { type: String },
+  sort: { type: Number },
 });
 
 module.exports = mongoose.model("Channel", schema, "channels");

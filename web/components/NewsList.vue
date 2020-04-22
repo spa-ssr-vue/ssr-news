@@ -6,7 +6,7 @@
         class="news-item d-flex ai-start py-12"
         v-if="news.covers.length === 1"
       >
-        <div>
+        <div class="flex-1 d-flex flex-column">
           <p class="news-item-title mb-12">
             {{ news.title }}
           </p>
@@ -31,7 +31,7 @@
         class="news-item d-flex flex-column pt-9 pb-6"
         v-else
       >
-        <div>
+        <div class="flex-1">
           <p class="news-item-title mb-6">{{ news.title }}</p>
           <div class="d-flex jc-between ai-center mb-6">
             <img

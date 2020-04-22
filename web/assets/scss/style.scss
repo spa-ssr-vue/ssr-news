@@ -76,6 +76,25 @@ body {
       line-height: 0.64rem;
     }
   }
+
+  &.nav-channels {
+    height: 0.8rem;
+    line-height: 0.8rem;
+    .nav-link {
+      position: relative;
+      &.nuxt-link-exact-active::after {
+        display: block;
+        content: '';
+        width: 0.36rem;
+        height: 0.06rem;
+        background-color: rgba(103, 245, 255, 1);
+        position: absolute;
+        bottom: 0.06rem;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
 }
 
 .news {
@@ -95,6 +114,7 @@ body {
       color: #222222;
       font-size: 0.36rem;
       line-height: 0.52rem;
+      min-height: 0.76rem;
     }
     .news-item-info {
       font-size: 0.24rem;
@@ -280,6 +300,11 @@ body {
   line-height: 0.36rem;
   img {
     margin-left: 0.08rem;
+  }
+
+  &.more-load {
+    height: 0.92rem;
+    line-height: 0.92rem;
   }
 }
 

@@ -1,18 +1,12 @@
 module.exports = app => {
+  const express = require("express");
+  const router = express.Router({ mergeParams: true });
+
   const Article = require("../../../libs/db/models/Article");
   const Tag = require("../../../libs/db/models/Tag");
 
-  app.use("/web/api/news/:id", async (req, res, next) => {
-    console.log(2);
-    const { id } = req.params;
-    console.log(id);
-
-    res.send(id);
-  });
-
-  app.use("/web/api/news", async (req, res, next) => {
+  router.get("/", async (req, res, next) => {
     const { type = "" } = req.query;
-    console.log(type);
     let newsList = [];
     switch (type) {
       case "tag":
@@ -33,4 +27,12 @@ module.exports = app => {
     }
     res.send(newsList);
   });
+
+  router.get("/:id", async (req, res, next) => {
+    const { id } = req.params;
+    const news = await Article.findById(id).populate("author channel tags");
+    res.send(news);
+  });
+
+  app.use("/web/api/news", router);
 };

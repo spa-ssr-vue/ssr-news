@@ -1,20 +1,45 @@
 <template>
   <div class="channels">
-    <div class="channels-header d-flex ai-center fs-18 text-white">
-      <nuxt-link to="/" class="d-flex ai-center">
-        <img src="./../../assets/img/ui-icon_log.svg" alt="" /><span
-          class="ml-3"
-          >首页</span
+    <div class="channels-header fs-18 text-white">
+      <div class="d-flex ai-center">
+        <nuxt-link to="/" class="d-flex ai-center">
+          <img src="./../../assets/img/ui-icon_log.svg" alt="" /><span
+            class="ml-3"
+            >首页</span
+          >
+        </nuxt-link>
+        <div class="sep"></div>
+        <div class="flex-1">{{ channel.name }}频道</div>
+        <nuxt-link to="/channel">
+          <img
+            class="channel"
+            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxLjE4OCAzLjc1SDIuODEzYS4xODguMTg4IDAgMCAwLS4xODguMTg4djEuNWMwIC4xMDMuMDg0LjE4Ny4xODguMTg3aDE4LjM3NWEuMTg4LjE4OCAwIDAgMCAuMTg3LS4xODh2LTEuNWEuMTg4LjE4OCAwIDAgMC0uMTg4LS4xODd6bTAgMTQuNjI1SDIuODEzYS4xODguMTg4IDAgMCAwLS4xODguMTg4djEuNWMwIC4xMDMuMDg0LjE4Ny4xODguMTg3aDE4LjM3NWEuMTg4LjE4OCAwIDAgMCAuMTg3LS4xODh2LTEuNWEuMTg4LjE4OCAwIDAgMC0uMTg4LS4xODd6bTAtNy4zMTNIMi44MTNhLjE4OC4xODggMCAwIDAtLjE4OC4xODh2MS41YzAgLjEwMy4wODQuMTg4LjE4OC4xODhoMTguMzc1YS4xODguMTg4IDAgMCAwIC4xODctLjE4OHYtMS41YS4xODguMTg4IDAgMCAwLS4xODgtLjE4OHoiIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIvPjwvc3ZnPg=="
+            alt="更多频道"
+        /></nuxt-link>
+      </div>
+      <nav ref="nav">
+        <ul
+          class="nav nav-channels d-flex ai-center text-white fs-16"
+          :class="isFixed ? 'fixed' : ''"
         >
-      </nuxt-link>
-      <div class="sep"></div>
-      <div class="flex-1">{{ channel }}频道</div>
-      <nuxt-link to="/channel">
-        <img
-          class="channel"
-          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxLjE4OCAzLjc1SDIuODEzYS4xODguMTg4IDAgMCAwLS4xODguMTg4djEuNWMwIC4xMDMuMDg0LjE4Ny4xODguMTg3aDE4LjM3NWEuMTg4LjE4OCAwIDAgMCAuMTg3LS4xODh2LTEuNWEuMTg4LjE4OCAwIDAgMC0uMTg4LS4xODd6bTAgMTQuNjI1SDIuODEzYS4xODguMTg4IDAgMCAwLS4xODguMTg4djEuNWMwIC4xMDMuMDg0LjE4Ny4xODguMTg3aDE4LjM3NWEuMTg4LjE4OCAwIDAgMCAuMTg3LS4xODh2LTEuNWEuMTg4LjE4OCAwIDAgMC0uMTg4LS4xODd6bTAtNy4zMTNIMi44MTNhLjE4OC4xODggMCAwIDAtLjE4OC4xODh2MS41YzAgLjEwMy4wODQuMTg4LjE4OC4xODhoMTguMzc1YS4xODguMTg4IDAgMCAwIC4xODctLjE4OHYtMS41YS4xODguMTg4IDAgMCAwLS4xODgtLjE4OHoiIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIvPjwvc3ZnPg=="
-          alt="更多频道"
-      /></nuxt-link>
+          <li class="nav-item px-12">
+            <nuxt-link
+              :to="`/channels/${parentChannel._id}`"
+              class="nav-link"
+              >{{ parentChannel.name === '新闻' ? '精选' : '推荐' }}</nuxt-link
+            >
+          </li>
+          <li
+            v-for="(channel, index) in channelList"
+            :key="`channel-${index}`"
+            class="nav-item px-12"
+          >
+            <nuxt-link :to="`/channels/${channel._id}`" class="nav-link">{{
+              channel.name
+            }}</nuxt-link>
+          </li>
+        </ul>
+      </nav>
     </div>
     <div>{{ id }}</div>
     <div class="channels-body">
@@ -34,19 +59,40 @@
       </div>
       <div><news-list :newsList="newsList"></news-list></div>
     </div>
+    <div
+      class="more more-load d-flex jc-center ai-center bg-white mt-6"
+      ref="more"
+      @click="pullWrapper"
+    >
+      <span class="text-blue-1">加载更多</span
+      ><img
+        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTMuNTYgNC4wOGw0LjM2IDUuODEzYS4xLjEgMCAwIDAgLjE2IDBsNC4zNi01LjgxM0EuMi4yIDAgMCAxIDEyLjYgNGgxYS4yLjIgMCAwIDEgLjE2LjMybC01LjI4IDcuMDRhLjYuNiAwIDAgMS0uOTYgMEwyLjI0IDQuMzJBLjIuMiAwIDAgMSAyLjQgNGgxYS4yLjIgMCAwIDEgLjE2LjA4eiIgZmlsbD0iIzUwNzZGNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PC9zdmc+"
+        alt="down icon"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import { directive } from 'vue-awesome-swiper'
+import { throttle, isShow } from './../../assets/js/utils'
 import NewsList from './../../components/NewsList'
 
 export default {
   layout: 'app',
   async asyncData({ params, $axios }) {
-    const res = await $axios.$get(`/news/${params.id}`)
+    const res = await $axios.$get(`/channels/${params.id}`, {
+      params: {
+        page: 1,
+        limit: 10
+      }
+    })
+
     return {
-      id: params.id
+      id: params.id,
+      channel: res.channel,
+      channelList: res.channelList,
+      newsList: res.newsList
     }
   },
   components: {
@@ -54,7 +100,7 @@ export default {
   },
   data() {
     return {
-      channel: '军事',
+      isFixed: false,
       banner: [
         {
           title: '',
@@ -69,116 +115,6 @@ export default {
           url: 'https://inews.gtimg.com/newsapp_ls/0/11528374649_640330/0'
         }
       ],
-      newsList: [
-        {
-          title: '中美外交官再次交火！华春莹一句反问直接“绝杀”美方，燃爆全场',
-          author: '长江新闻号',
-          comment: 52,
-          time: '5小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11578311744_294195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578311643_294195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578311747_294195/0'
-          ]
-        },
-        {
-          title: '又一国要转向东方？美国下令不惜代价挽回，派出数万美军阻止',
-          author: '大国鉴',
-          comment: 31,
-          time: '5小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11578235891_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578235892_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578235893_295195/0'
-          ]
-        },
-        {
-          title: '罗斯福号已有550人确诊 航母暴发疫情为何比邮轮更“毒”?',
-          author: '环球网军事',
-          comment: 6,
-          time: '6小时前',
-          covers: ['https://inews.gtimg.com/newsapp_ls/0/11578089931_294195/0']
-        },
-        {
-          title: '辽宁舰绕台进入南海之际 美军侦察机连续4天在南海上空飞行',
-          author: '环球网',
-          comment: 615,
-          time: '5小时前',
-          covers: ['https://inews.gtimg.com/newsapp_ls/0/11578312961_294195/0']
-        },
-        {
-          title: '中美外交官再次交火！华春莹一句反问直接“绝杀”美方，燃爆全场',
-          author: '长江新闻号',
-          comment: 52,
-          time: '5小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11578311744_294195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578311643_294195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578311747_294195/0'
-          ]
-        },
-        {
-          title: '又一国要转向东方？美国下令不惜代价挽回，派出数万美军阻止',
-          author: '大国鉴',
-          comment: 31,
-          time: '5小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11578235891_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578235892_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578235893_295195/0'
-          ]
-        },
-        {
-          title: '罗斯福号已有550人确诊 航母暴发疫情为何比邮轮更“毒”?',
-          author: '环球网军事',
-          comment: 6,
-          time: '6小时前',
-          covers: ['https://inews.gtimg.com/newsapp_ls/0/11578089931_294195/0']
-        },
-        {
-          title: '辽宁舰绕台进入南海之际 美军侦察机连续4天在南海上空飞行',
-          author: '环球网',
-          comment: 615,
-          time: '5小时前',
-          covers: ['https://inews.gtimg.com/newsapp_ls/0/11578312961_294195/0']
-        },
-        {
-          title: '中美外交官再次交火！华春莹一句反问直接“绝杀”美方，燃爆全场',
-          author: '长江新闻号',
-          comment: 52,
-          time: '5小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11578311744_294195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578311643_294195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578311747_294195/0'
-          ]
-        },
-        {
-          title: '又一国要转向东方？美国下令不惜代价挽回，派出数万美军阻止',
-          author: '大国鉴',
-          comment: 31,
-          time: '5小时前',
-          covers: [
-            'https://inews.gtimg.com/newsapp_ls/0/11578235891_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578235892_295195/0',
-            'https://inews.gtimg.com/newsapp_ls/0/11578235893_295195/0'
-          ]
-        },
-        {
-          title: '罗斯福号已有550人确诊 航母暴发疫情为何比邮轮更“毒”?',
-          author: '环球网军事',
-          comment: 6,
-          time: '6小时前',
-          covers: ['https://inews.gtimg.com/newsapp_ls/0/11578089931_294195/0']
-        },
-        {
-          title: '辽宁舰绕台进入南海之际 美军侦察机连续4天在南海上空飞行',
-          author: '环球网',
-          comment: 615,
-          time: '5小时前',
-          covers: ['https://inews.gtimg.com/newsapp_ls/0/11578312961_294195/0']
-        }
-      ],
       swiperOption: {
         autoplay: {
           delay: 2000
@@ -186,6 +122,55 @@ export default {
         pagination: {
           el: '.swiper-pagination'
         }
+      },
+      query: {
+        page: 1,
+        limit: 10
+      }
+    }
+  },
+  computed: {
+    parentChannel() {
+      if (this.channel.parentChannel) {
+        return this.channel.parentChannel
+      }
+      return this.channel
+    },
+    pullLazy() {
+      return throttle(this.pull, 200)
+    },
+    fixNavThrottle() {
+      return throttle(this.fixNav, 100)
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.pullLazy)
+    window.addEventListener('scroll', this.fixNavThrottle)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.pullLazy)
+    window.removeEventListener('scroll', this.fixNavThrottle)
+  },
+  methods: {
+    async pull() {
+      if (isShow(this.$refs.more) && this.query.page <= 5) {
+        await this.pullWrapper()
+      }
+    },
+    async pullWrapper() {
+      this.query.page += 1
+      const res = await this.$axios.$get(`/channels/${this.id}`, {
+        params: this.query
+      })
+      this.newsList = this.newsList.concat(res.newsList)
+      // this.homeNews.push(res)
+    },
+    fixNav() {
+      console.log(this.$refs.nav.getBoundingClientRect().top)
+      if (this.$refs.nav.getBoundingClientRect().top <= 0) {
+        this.isFixed = true
+      } else {
+        this.isFixed = false
       }
     }
   }
@@ -195,8 +180,10 @@ export default {
 <style lang="scss">
 .channels {
   .channels-header {
-    height: 44px;
-    padding: 0.2rem 0.24rem 0.2rem 0.18rem;
+    // height: 44px;
+    > div {
+      padding: 0.24rem 0.24rem 0.08rem 0.18rem;
+    }
     background-color: rgb(83, 123, 255);
     .sep {
       position: relative;
@@ -209,12 +196,13 @@ export default {
         height: 0.36rem;
         background-color: rgb(224, 242, 255);
         position: absolute;
-        right: 0;
-        bottom: 0.04rem;
+        left: 0;
+        bottom: -0.2rem;
         transform: scaleX(0.5);
       }
     }
   }
+
   .channels-body {
     .banner {
       margin: 0.24rem 0.3rem 0 0.3rem;

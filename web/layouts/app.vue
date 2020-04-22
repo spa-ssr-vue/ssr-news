@@ -1,5 +1,5 @@
 <template>
-  <nuxt />
+  <nuxt :key="$route.path" />
 </template>
 
 <script>
